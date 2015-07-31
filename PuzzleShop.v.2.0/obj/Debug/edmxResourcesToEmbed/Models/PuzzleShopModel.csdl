@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PuzzleShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Subcategories" Relationship="Self.FK_Subcategory_ToTable" FromRole="Category" ToRole="Subcategory" />
+  </EntityType>
+  <EntityType Name="ItemsTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubcategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Discount_Price" Type="Double" Nullable="false" />
+    <Property Name="Whoresale_Price" Type="Double" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Foto_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Subcategory" Relationship="Self.FK_ItemsTable_ToTable" FromRole="ItemsTable" ToRole="Subcategory" />
+  </EntityType>
+  <EntityType Name="Subcategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="SubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Subcategory_ToTable" FromRole="Subcategory" ToRole="Category" />
+    <NavigationProperty Name="ItemsTables" Relationship="Self.FK_ItemsTable_ToTable" FromRole="Subcategory" ToRole="ItemsTable" />
+  </EntityType>
+  <Association Name="FK_Subcategory_ToTable">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Subcategory" Type="Self.Subcategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subcategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemsTable_ToTable">
+    <End Role="Subcategory" Type="Self.Subcategory" Multiplicity="1" />
+    <End Role="ItemsTable" Type="Self.ItemsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItemsTable">
+        <PropertyRef Name="SubcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PuzzleShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="ItemsTables" EntityType="Self.ItemsTable" />
+    <EntitySet Name="Subcategories" EntityType="Self.Subcategory" />
+    <AssociationSet Name="FK_Subcategory_ToTable" Association="Self.FK_Subcategory_ToTable">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Subcategory" EntitySet="Subcategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemsTable_ToTable" Association="Self.FK_ItemsTable_ToTable">
+      <End Role="Subcategory" EntitySet="Subcategories" />
+      <End Role="ItemsTable" EntitySet="ItemsTables" />
+    </AssociationSet>
+    <EntitySet Name="Logins" EntityType="PuzzleShopModel.Login" />
+  </EntityContainer>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="role_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="role_bitMask" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PuzzleShopModelStoreContainer" CdmEntityContainer="PuzzleShopEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="PuzzleShopModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="product_Category" ColumnName="product_Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemsTables">
+      <EntityTypeMapping TypeName="PuzzleShopModel.ItemsTable">
+        <MappingFragment StoreEntitySet="ItemsTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Discount_Price" ColumnName="Discount_Price" />
+          <ScalarProperty Name="Whoresale_Price" ColumnName="Whoresale_Price" />
+          <ScalarProperty Name="Discription" ColumnName="Discription" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Foto_2" ColumnName="Foto_2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subcategories">
+      <EntityTypeMapping TypeName="PuzzleShopModel.Subcategory">
+        <MappingFragment StoreEntitySet="Subcategory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logins">
+      <EntityTypeMapping TypeName="PuzzleShopModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="role_bitMask" ColumnName="role_bitMask" />
+          <ScalarProperty Name="role_Title" ColumnName="role_Title" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
